@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import CryptoJS from "crypto-js";
-import NavBar from "../components/NavBar";
 
 function LoginForm() {
     const [email, setEmail] = useState('')
@@ -49,7 +48,6 @@ function LoginForm() {
 export default function Login() {
     return (
         <div>
-            <NavBar />
             <LoginForm />
         </div>
     )

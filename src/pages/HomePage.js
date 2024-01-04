@@ -1,8 +1,12 @@
 import React from "react";
-import NavBar from "../components/NavBar"
 
 export default function Home(){
     return (
-        <NavBar />
+        <div>
+            <section className="hero">
+                <h1>To jest przykładowa strona sklepu</h1>
+                <p>A tutaj jest jej opis</p>
+            </section>
+        </div>
     )
 }

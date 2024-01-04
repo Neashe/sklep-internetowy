@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CryptoJS from "crypto-js"
-import NavBar from "../components/NavBar";
 
 function RegisterForm() {
     const [newUser, setNewUser] = useState({ "firstname": "", "lastname": "", "email": "", "hashedPassword": "", "type": "customer" })
@@ -54,7 +53,6 @@ function RegisterForm() {
 export default function Register() {
     return (
         <div>
-            <NavBar />
             <RegisterForm />
         </div>
     )

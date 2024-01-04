@@ -6,10 +6,12 @@ import Register from "./pages/RegisterPage"
 import Login from "./pages/LoginPage"
 import Profile from "./pages/ProfilePage"
 import Employee from "./pages/AdminPage"
+import Navbar from "./components/Navbar"
 
 function App(){
     return(
         <BrowserRouter>
+        <Navbar></Navbar>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register />} />

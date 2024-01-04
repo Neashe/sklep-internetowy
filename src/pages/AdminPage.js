@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom"
-import NavBar from "../components/NavBar";
 
 export default function Employee(){
     const [isLoading, setIsLoading] = useState(true)
@@ -50,7 +49,6 @@ export default function Employee(){
 
     return (
         <div>
-            <NavBar />
             <h1>Employee Page</h1>
         </div>
     )
