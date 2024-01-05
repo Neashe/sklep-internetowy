@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import CryptoJS from "crypto-js";
 import '../styles/login.css';
+import { useAuth } from "../hooks/useAuth";
 
 function LoginForm() {
     const [email, setEmail] = useState('')
     const [hashedPassword, setPassword] = useState('')
     const navigate = useNavigate()
+    const {setLoggedIn} = useAuth();
 
     const handleLogin = () => {
         console.log(email, hashedPassword)
@@ -29,6 +31,7 @@ function LoginForm() {
             })
             .then(data => {
                 localStorage.setItem("jwtToken", data.token)
+                setLoggedIn(true)
                 navigate("/")
             })
             .catch(e => {
@@ -57,10 +60,10 @@ function LoginForm() {
     )
 }
 
-export default function Login() {
+export default function Login({setLoggedIn}) {
     return (
         <div>
-            <LoginForm />
+            <LoginForm setLoggedIn={setLoggedIn} />
         </div>
     )
 }

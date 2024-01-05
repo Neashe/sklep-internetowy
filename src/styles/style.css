@@ -1,7 +1,5 @@
 body {
   font-family: 'Montserrat', sans-serif;
-  /* font-family: 'Montserrat', sans-serif; */
-  /* font-family: 'Open Sans', sans-serif; */
 }
 
 .navbar {
@@ -19,7 +17,7 @@ body {
   
   .logo {
     display: flex;
-    align-items: center;
+    align-items: center;  
     justify-content: space-around;
     gap: 10px;
   }

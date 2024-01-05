@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CryptoJS from "crypto-js"
 import '../styles/register.css'
 
@@ -7,7 +7,7 @@ function RegisterForm() {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
-        if (name == "hashedPassword") {
+        if (name === "hashedPassword") {
             setNewUser((prev) => ({
                 ...prev, [name]: CryptoJS.SHA256(value).toString()
             }))
