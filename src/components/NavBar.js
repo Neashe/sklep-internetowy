@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import axios from "axios";
+import '../styles/style.css';
 
 const api = axios.create({
     baseURL: "http://localhost:5000",
@@ -10,7 +11,7 @@ const api = axios.create({
     },
   });
 
-export default function NavBar() {
+export default function Navbar() {
 
     const [isLoggedIn,setLoggedIn] = useState(!!localStorage.getItem("jwtToken"));
     const [userRole, setUserRole] = useState();
@@ -40,35 +41,29 @@ export default function NavBar() {
     }
     return (
 
-        <div>
-            <Link to="/">Home</Link>
-            {!isLoggedIn && <Link to="/login">Login</Link>}
-            {!isLoggedIn && <Link to="/register">Register</Link>}
-            {userRole !==null && <Link to="/employee">Employee</Link>}
-            {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+        <nav className="navbar">
+            <div className="logo">
+                <Link to="/"><h1>HOME</h1></Link>
+                <input type="text" name="" id="" placeholder="searchbar" />
+            </div>
+            <div className="productLinks">
+                <Link to="/products">PRODUCTS</Link>
+                <Link to="/contact">CONTACT US</Link>
+                <Link to="/basket"><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="basket-icon" /></Link>
 
-        </div>
+            </div>
+            <div className="loginLinks">
+                <Link to ="/login"><img  className="icon" src={process.env.PUBLIC_URL + '/icons/user.png'} alt="profileIcon" /></Link>
+                {!isLoggedIn && <Link to="/login">Login</Link>}
+                {!isLoggedIn && <Link to="/register">Register</Link>}
+                {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
+                <h3>{isLoggedIn}</h3>
+                {console.log(isLoggedIn)}
+            </div>
+            <div className="adminLinks">
+                {/* {userRole !==null && <Link to="/employee">Employee</Link>} */}
+            </div>
 
-
-
-
-        // <div className="Nav">
-        //     {localStorage.length == 0 ? (
-        //         <>
-        //             <Link to="/">Home</Link>
-        //             <Link to="/login">Login</Link>
-        //             <Link to="/register">Register</Link>
-        //             <Link to="/employee">Employee</Link>
-        //         </>
-        //     ) : (
-        //         <>
-        //             <Link to="/">Home</Link>
-        //             <Link to="/login">Login</Link>
-        //             <Link to="/register">Register</Link>
-        //             <Link to="/employee">Employee</Link>
-        //             <Link to="/profile">Profile</Link>
-        //         </>
-        //     )}
-        // </div>
+        </nav>
     )
 }

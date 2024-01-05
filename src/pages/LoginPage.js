@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom"
 import CryptoJS from "crypto-js";
+import '../styles/login.css';
 
 function LoginForm() {
     const [email, setEmail] = useState('')
@@ -35,12 +36,23 @@ function LoginForm() {
             })
     }
 
+    const handleNavigate = () => {
+        navigate("/register");
+    }
+
     return (
-        <div>
-            <h2>Login</h2>
-            <input type="email" name="email" placeholder="email" onChange={e => setEmail(e.target.value)} />
-            <input type="password" name="hashedPassword" placeholder="password" onChange={e => setPassword(CryptoJS.SHA256(e.target.value).toString())} />
-            <button onClick={handleLogin}>Sign in</button>
+        <div className="login-register">
+            <section className="login">
+                <h1>LOGIN</h1>
+                <input className="login-input" type="email" name="email" placeholder="email" onChange={e => setEmail(e.target.value)} />
+                <input className="login-input" type="password" name="hashedPassword" placeholder="password" onChange={e => setPassword(CryptoJS.SHA256(e.target.value).toString())} />
+                <button className="log-btn signin" onClick={handleLogin}>SIGN IN</button>
+            </section>
+
+            <section className="register">
+                <h1>DONT'T HAVE AN ACCOUNT YET?</h1>
+                <button className="log-btn signup" onClick={handleNavigate}>SIGN UP</button>
+            </section>
         </div>
     )
 }
