@@ -52,7 +52,18 @@ button:hover{
 .filter {
     background-color: antiquewhite;
     width: 350px;
+
 }
 .products-browser{
     display: flex;
+    padding: 20px;
+    gap: 10px;
+}
+
+
+select{
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+
 }

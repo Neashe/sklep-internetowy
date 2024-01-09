@@ -1,5 +1,5 @@
 import "../styles/products.css";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const findMinMaxPrice = (data) => {
     var maxValue = Math.max(...data.map(obj => obj.price))
@@ -14,9 +14,11 @@ const Filter = ({ products, onFilterChange }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceRange, setPriceRange] = useState(findMinMaxPrice(products));
 
+  const uniqueCategories = Array.from(new Set(products.map((product)=> product.category)));
+
   const applyFilters = (filters) => {
     const appliedFilters = {
-      sortBy,
+      sortBy: sortBy,
       rating: selectedRating,
       category: selectedCategory,
       price: priceRange,
@@ -24,6 +26,13 @@ const Filter = ({ products, onFilterChange }) => {
     };
     onFilterChange(appliedFilters);
   };
+
+  useEffect(() =>{
+    console.log("aha");
+    applyFilters()
+
+  },[sortBy,selectedRating,selectedCategory,priceRange]);
+
 
   return (
     <div>
@@ -61,8 +70,9 @@ const Filter = ({ products, onFilterChange }) => {
         <label>
           Category:
           <select value={selectedCategory} onChange={(e)=> setSelectedCategory(e.target.value)}>
-            {products.map((product)=>(
-                <option value={product.category}>{product.category}</option>
+            <option value="all">All</option>
+            {uniqueCategories.map((category,id)=>(
+                <option key ={id} value={category}>{category}</option>
             ))}
           </select>
         </label>
@@ -72,7 +82,6 @@ const Filter = ({ products, onFilterChange }) => {
           Price Range: ${priceRange[0]} - ${priceRange[1]}
         </label>
       </div>
-      <button onClick={applyFilters}>Apply filters</button>
     </div>
   );
 };

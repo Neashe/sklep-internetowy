@@ -1,6 +1,16 @@
+import { useState } from "react";
 import Filter from "../components/Filter";
 import ProductsList from "../components/ProductsList";
 const ProductsBrowser = () => {
+
+    const defaultFilters ={
+        sortBy: 'default',
+        rating: 0,
+        category: 'all',
+        price: [0,9999],
+    }
+
+    const[Filters,setFilters] = useState(defaultFilters);
 
     const products = [
         {
@@ -44,30 +54,25 @@ const ProductsBrowser = () => {
             "thumbnail": ""
         }
     ]
-    var filteredProducts = products;
+    const filteredProducts = products
+    .filter((product) => {
+
+        const ratingCondition = Filters.rating !== 0 ? Filters.rating === product.rating: true;
+        const categoryCondition = Filters.category !== 'all' ? Filters.category === product.category : true;
+
+        return ratingCondition && categoryCondition;
+    })
+    .sort((a,b)=>{
+        const titleA = a.productName.toLowerCase();
+        const titleB = b.productName.toLowerCase();
+        if (Filters.sortBy === 'name'){
+            return titleA.localeCompare(titleB);    
+        }
+        return 0;
+    })
 
     const onFilterChange = (filters) =>{
-        filteredProducts = products
-        .filter((product) => {
-            if (filters.rating !== 0){
-                return filters.rating === product.rating;
-            }
-            console.log(filters.category);
-            if (filters.category !== "all"){
-                return filters.category === product.category;
-            }
-
-        })
-        .sort((a,b)=>{
-            const titleA = a.productName.toLowerCase();
-            const titleB = b.productName.toLowerCase();
-            if (filters.sortBy === 'name'){
-                return titleA.localeCompare(titleB);    
-            }
-            return 0;
-        })
-
-        console.log(products);
+        setFilters(filters);
     }
     return ( 
         <div className="products-browser">
@@ -75,6 +80,6 @@ const ProductsBrowser = () => {
             <ProductsList products={filteredProducts}></ProductsList>
         </div>
      );
-}
+    }
  
 export default ProductsBrowser;
