@@ -75,6 +75,17 @@ def user():
     else:
         return jsonify({'message': 'User not found'}), 404
 
+@app.route('/user/type', methods=['GET'])
+@jwt_required()
+def userType():
+    user_email = get_jwt_identity()
+    user = User.query.filter_by(email=user_email).first()
+
+    if user:
+        return jsonify({'type': user.type})
+    else:
+        return jsonify({'message': 'User not found'}), 404
+
 
 @app.route('/user/modify/<int:id>', methods=['PUT', 'OPTIONS'])
 def userModify(id):

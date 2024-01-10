@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CryptoJS from "crypto-js"
-import NavBar from "../components/NavBar";
+import '../styles/register.css'
 
 function RegisterForm() {
     const [newUser, setNewUser] = useState({ "firstname": "", "lastname": "", "email": "", "hashedPassword": "", "type": "customer" })
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
-        if (name == "hashedPassword") {
+        if (name === "hashedPassword") {
             setNewUser((prev) => ({
                 ...prev, [name]: CryptoJS.SHA256(value).toString()
             }))
@@ -40,7 +40,7 @@ function RegisterForm() {
     }
 
     return (
-        <div>
+        <div className="register-page">
             <h1>Register</h1>
             <input type="text" name="firstname" placeholder="firstname" onChange={handleInputChange} />
             <input type="text" name="lastname" placeholder="lastname" onChange={handleInputChange} />
@@ -54,7 +54,6 @@ function RegisterForm() {
 export default function Register() {
     return (
         <div>
-            <NavBar />
             <RegisterForm />
         </div>
     )

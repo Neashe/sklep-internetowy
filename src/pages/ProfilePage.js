@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
-import NavBar from "../components/NavBar";
 
 function ProfileShow() {
     const [user, setUser] = useState({"id":"", "firstname":"", "lastname":"", "email":"", "hashedPassword":"", "type":""})
@@ -101,7 +100,6 @@ function ProfileShow() {
 export default function Profile() {
     return (
         <div>
-            <NavBar />
             <ProfileShow />
         </div>
     )

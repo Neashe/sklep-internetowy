@@ -1,0 +1,66 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    background-color: #FAF4F0;
+  }
+  
+  .logo,
+  .productLinks,
+  .loginLinks,
+  .adminLinks {
+    flex: 1;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;  
+    justify-content: space-around;
+    gap: 10px;
+  }
+  .logo a {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #EA344F;
+  }
+  .logo input {
+    border-radius: 10px;
+    height: 1.5rem;
+    width: auto;
+  }
+  
+  .productLinks,
+  .loginLinks,
+  .adminLinks {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  /* Optional: Style the links and buttons */
+  .productLinks a,
+  .loginLinks a,
+  .adminLinks a{
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: black;
+
+  }
+  .loginLinks button {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .icon {
+    width: 30px;
+  }
+  
+  /* Adjust the styles as per your design preferences */
+  
