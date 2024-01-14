@@ -1,42 +1,56 @@
 .products-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 100px;
+    justify-content:first baseline;
 }
 
 .product{
     display: flex;
-    width: 300px;
+    width: 250px;
     height: 300px;
     flex-direction: column;
-    align-items: center;
-    background-color: #FAF4F0;
+    align-items: first baseline;
     padding: 10px;
+
+    button{
+        visibility: hidden;
+        }
 }
 
 .product:hover{
     background-color: #EAE4E0;
     cursor: pointer;
 
+    button {
+        visibility: visible;
+        }
+
 }
 
 .product img {
-    width: 300px;
+    width: 250px;
     height: 200px;
-    background-color: #F0DDD1;
-    /* border-radius: 10px; */
 }
 h3 {
-    margin: 10px 0 5px 0;
+    margin: 1px;
+    font-weight: 500;
+}
+
+.rating {
+    font-weight: 300;
+}
+
+.product-name{
+    color:#EA344F;
 }
 
 button {
     color: white;
-    background-color: #49975A;
-    border: none;
+    background-color: white;
+    border: 1px solid #68B679;
     border-radius: 10px;
-    width: 150px;
-    height: 30px;
+    height: 40px;
+    justify-self: end;
 }
 
 button:hover{
@@ -44,15 +58,22 @@ button:hover{
     cursor: pointer;
 }
 
-.product-price{
-    color: #EA344F;
-    margin: none;
-}
 
 .filter {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
+    /* display: flex;
+    flex-direction: column; */
     width: 350px;
+    border-right: 1px solid black;
+    /* gap: 10px; */
 
+}
+
+.filter-comp{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
 }
 .products-browser{
     display: flex;
@@ -60,10 +81,70 @@ button:hover{
     gap: 10px;
 }
 
+.cart {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: end;
+    gap: 10px;
+}
+p{
+    margin: 2px;
+}
+
+.cart img {
+    width: 30px;
+    height: 30px;
+}
 
 select{
     width: 200px;
     height: 30px;
     border-radius: 10px;
 
+}
+
+.horizontal-slider {
+    /* width: 100%; */
+    max-width: 90%;
+    height: 40px;
+}
+
+.horizontal-slider .example-track {
+    top: 20px;
+    height: 6px;
+    border-radius: 10px;
+}
+
+.horizontal-slider .example-thumb {
+    top: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #f77d8f;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.example-track.example-track-0{
+    background: #EAE4E0;
+}
+
+.example-track.example-track-1{
+    background: #f77d8f;
+}
+.example-track.example-track-2{
+    background: #EAE4E0;
+}
+
+.filter-components {
+    display: flex;
+    flex-direction: column;
+}
+
+.ratings {
+    width: 30px;
+    height: 15px;
+    font-size: 1.1rem;
 }

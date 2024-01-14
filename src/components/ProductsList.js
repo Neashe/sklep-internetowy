@@ -27,10 +27,13 @@ const ProductList = ({products}) => {
             {products.map((product)=>(
                 <div className="product" key={product.productID}>
                     <img src={product.thumbnail} alt="product-image" />
-                    <h3>{product.productName}</h3>
-                    <h3 className="product-price">{product.price}</h3>
-                    <p>rating {product.rating}</p>
-                    <button onClick={handleAddToCart}>Add to cart</button>
+                    <h3 className="product-name">{product.productName}</h3>
+                    <p className="rating">rating {product.rating}</p>
+                    <div className="cart">
+                        <h3>{product.price} $</h3>
+                        <button onClick={handleAddToCart}><img src={process.env.PUBLIC_URL + '/icons/add-to-cart.png'} alt="" /></button>
+
+                    </div>
                 </div>
             ))}
         </div>

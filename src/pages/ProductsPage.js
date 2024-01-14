@@ -56,8 +56,8 @@ const ProductsBrowser = () => {
     ]
     const filteredProducts = products
     .filter((product) => {
-
-        const ratingCondition = Filters.rating !== 0 ? Filters.rating === product.rating: true;
+        
+        const ratingCondition = Filters.rating !== null ? Filters.rating === Math.floor(product.rating): true;
         const categoryCondition = Filters.category !== 'all' ? Filters.category === product.category : true;
 
         return ratingCondition && categoryCondition;
@@ -67,6 +67,12 @@ const ProductsBrowser = () => {
         const titleB = b.productName.toLowerCase();
         if (Filters.sortBy === 'name'){
             return titleA.localeCompare(titleB);    
+        }
+        if (Filters.sortBy === 'price-asc'){
+            return a.price - b.price;
+        }
+        if (Filters.sortBy === 'price-desc'){
+            return b.price - a.price;
         }
         return 0;
     })
