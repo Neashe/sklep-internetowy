@@ -11,13 +11,16 @@ const findMinMaxPrice = (data) => {
 }
 const Filter = ({ products, onFilterChange }) => {
 
+  console.log(products);
+  const [loading,setLoading] = useState(true);
+  const [defaultPriceRange,setDefaultPriceRange] = useState([0,9999]);
+  const [priceRange, setPriceRange] = useState([0,9999]);
+
   const [sortBy, setSortBy] = useState('default');
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [priceRange, setPriceRange] = useState(findMinMaxPrice(products));
 
   const uniqueCategories = Array.from(new Set(products.map((product)=> product.category)));
-  const defaultPriceRange = findMinMaxPrice(products);
 
   const applyFilters = (filters) => {
     const appliedFilters = {
@@ -30,12 +33,21 @@ const Filter = ({ products, onFilterChange }) => {
     onFilterChange(appliedFilters);
   };
 
-  const handleChange1 = () => {
-    console.log("Change...");
-  }
+  useEffect(() => {
+    const fetchDefaultPriceRange = async () => {
+      const range = findMinMaxPrice(products);
+      setDefaultPriceRange(range);
+      setPriceRange(range);
+      setLoading(false);
+    };
+    if (products){
+      fetchDefaultPriceRange();
+    }
+    console.log("load!");
+    
+  }, [products]);
 
   useEffect(() =>{
-    console.log("aha");
     applyFilters()
 
   },[sortBy,selectedRating,selectedCategory,priceRange]);
@@ -43,8 +55,7 @@ const Filter = ({ products, onFilterChange }) => {
 
   return (
     <div className="filter">
-      {/* <h2>Product Filters</h2> */}
-
+      <h2>{String(loading)}</h2>
       <div className="filter-comp">
         <label htmlFor="sort">
           Sort By
@@ -91,7 +102,7 @@ const Filter = ({ products, onFilterChange }) => {
             ))}
           </select>
       </div>
-      <div>
+      {!loading && <div>
         <label className="filter-label">
           Price Range: ${priceRange[0]} - ${priceRange[1]}
         </label>  
@@ -99,15 +110,15 @@ const Filter = ({ products, onFilterChange }) => {
           className="horizontal-slider"
           thumbClassName="example-thumb"
           trackClassName="example-track"
-          defaultValue={defaultPriceRange}
+          range={defaultPriceRange}
+          value={priceRange}
           min={defaultPriceRange[0]}
           max={defaultPriceRange[1]}
           onChange={(value) =>setPriceRange(value)}
           pearling
           minDistance={50}
         />
-
-    </div>
+    </div>}
     </div>
   );
 };

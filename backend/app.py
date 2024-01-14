@@ -43,6 +43,32 @@ class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Product
 
+@app.route('/products', methods = ['GET'])
+def products():
+    products = Product.query.all()
+
+    productSchema = ProductSchema(many=True)
+    result = productSchema.dump(products)
+
+    return jsonify(result)
+
+@app.route('/products', methods=['POST'])
+def add_products():
+    try:
+        data = request.get_json()
+
+        # Assuming 'data' is a list of products
+        for product_data in data:
+            new_product = Product(**product_data)
+            db.session.add(new_product)
+
+        db.session.commit()
+
+        return jsonify({"message": "Products added successfully"}), 201
+    except Exception as e:
+        # Handle any exceptions that might occur during the process
+        return jsonify({"error": str(e)}), 500
+    
 @app.route('/')
 def check():
     return jsonify('Hello World')

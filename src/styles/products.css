@@ -105,8 +105,8 @@ select{
 }
 
 .horizontal-slider {
-    /* width: 100%; */
-    max-width: 90%;
+    width: 300px;
+    max-width: 300px;
     height: 40px;
 }
 
@@ -148,3 +148,52 @@ select{
     height: 15px;
     font-size: 1.1rem;
 }
+
+
+/* [
+    {
+        "productName": "Laptop",
+        "category": "Electronics",
+        "price": 999.99,
+        "quantity": 50,
+        "rating": 4.5,
+        "description": "Powerful laptop for all your computing needs",
+        "thumbnail": "https://picsum.photos/250/200"
+    },
+    {
+        "productName": "Smartphone",
+        "category": "Electronics",
+        "price": 499.99,
+        "quantity": 100,
+        "rating": 4.2,
+        "description": "Feature-rich smartphone with the latest technology",
+        "thumbnail": "https://picsum.photos/250/200"
+    },
+    {
+        "productName": "Coffee Maker",
+        "category": "Appliances",
+        "price": 79.99,
+        "quantity": 30,
+        "rating": 4.0,
+        "description": "Brew your favorite coffee with this stylish coffee maker",
+        "thumbnail": "https://picsum.photos/250/200"
+    },
+    {
+        "productName": "Running Shoes",
+        "category": "Sports & Outdoors",
+        "price": 89.99,
+        "quantity": 75,
+        "rating": 4.8,
+        "description": "Comfortable and durable running shoes for your active lifestyle",
+        "thumbnail": "https://picsum.photos/250/200"
+    },
+    {
+        "productName": "Wireless Earbuds",
+        "category": "Electronics",
+        "price": 59.99,
+        "quantity": 50,
+        "rating": 4.3,
+        "description": "Enjoy music on the go with these high-quality wireless earbuds",
+        "thumbnail": "https://picsum.photos/250/200"
+    },
+] */

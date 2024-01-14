@@ -20,7 +20,7 @@ export default function Navbar() {
             <div className="productLinks">
                 <Link to="/products">PRODUCTS</Link>
                 <Link to="/contact">CONTACT US</Link>
-                <Link to="/basket"><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="basket-icon" /></Link>
+                <Link to="/cart"><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="cart-icon" /></Link>
 
             </div>
             <div className="loginLinks">
