@@ -117,7 +117,7 @@ const Filter = ({ products, onFilterChange }) => {
             ))}
           </select>
       </div>
-      <div>
+      {products.length>0 && <div>
         <label className="filter-label">
           Price Range: ${priceRange[0]} - ${priceRange[1]}
         </label>  
@@ -133,8 +133,9 @@ const Filter = ({ products, onFilterChange }) => {
           pearling
           minDistance={50}
         />}
-    </div>
     {!loading && <button onClick={handlePriceRange}>Apply</button>}
+    {console.log(products)}
+    </div>}
     </div>
   );
 };

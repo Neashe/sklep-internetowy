@@ -26,12 +26,11 @@ export default function Navbar() {
             <div className="loginLinks">
                 <Link to ={isLoggedIn ? "/profile" : "/login"}><img  className="icon" src={process.env.PUBLIC_URL + '/icons/user.png'} alt="profileIcon" /></Link>
                 {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
-                {/* test */}
                 <h3>{isLoggedIn && <p>You are logged in</p>}</h3> 
             </div>
             <div className="adminLinks">
                 {/* in future should be seen only by admin/employee types */}
-                {userRole !==null && <Link to="/employee">Manage account</Link>}
+                {userRole !==null && <Link to="/employee">Management tool</Link>}
             </div>
 
         </nav>

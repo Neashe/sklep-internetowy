@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar"
 import { AuthProvider } from "./hooks/useAuth";
 import ProductsBrowser from "./pages/ProductsPage";
 import Product from "./pages/ProductPage";
+import Contact from "./pages/ContactPage";
 
 function App(){
 
@@ -24,6 +25,7 @@ function App(){
                     <Route path="/employee" element={<Employee />} />
                     <Route path="/products" element={<ProductsBrowser />} />
                     <Route path="/products/:id" element={<Product/>}/>
+                    <Route path="/contact" element={<Contact/>}></Route>
                 </Routes>
             </BrowserRouter>
         </AuthProvider>
