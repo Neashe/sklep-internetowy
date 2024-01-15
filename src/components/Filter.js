@@ -2,7 +2,6 @@ import "../styles/products.css";
 import React, { useEffect, useState } from 'react';
 import ReactSlider from "react-slider";
 
-
 const findMinMaxPrice = (data) => {
     var maxValue = Math.max(...data.map(obj => obj.price))
     var minValue = Math.min(...data.map(obj => obj.price))
@@ -11,27 +10,44 @@ const findMinMaxPrice = (data) => {
 }
 const Filter = ({ products, onFilterChange }) => {
 
-  console.log(products);
   const [loading,setLoading] = useState(true);
   const [defaultPriceRange,setDefaultPriceRange] = useState([0,9999]);
   const [priceRange, setPriceRange] = useState([0,9999]);
-
   const [sortBy, setSortBy] = useState('default');
   const [selectedRating, setSelectedRating] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const uniqueCategories = Array.from(new Set(products.map((product)=> product.category)));
 
-  const applyFilters = (filters) => {
-    const appliedFilters = {
-      sortBy: sortBy,
-      rating: selectedRating,
-      category: selectedCategory,
-      price: priceRange,
-      ...filters,
-    };
-    onFilterChange(appliedFilters);
-  };
+  const filterProducts = (products) => {
+    const filtered = products.filter((product) => {
+
+        const ratingCondition = selectedRating !== null ? selectedRating === Math.floor(product.rating): true;
+        const categoryCondition = selectedCategory !== 'all' ? selectedCategory === product.category : true;
+        const priceCondition = priceRange[0] <= product.price && product.price <= priceRange[1];
+
+        return ratingCondition && categoryCondition && priceCondition;
+    })
+    .sort((a,b)=>{
+        const titleA = a.productName.toLowerCase();
+        const titleB = b.productName.toLowerCase();
+        if (sortBy === 'name'){
+            return titleA.localeCompare(titleB);    
+        }
+        if (sortBy === 'price-asc'){
+            return a.price - b.price;
+        }
+        if (sortBy === 'price-desc'){
+            return b.price - a.price;
+        }
+        return 0;
+    })
+    onFilterChange(filtered);
+}
+
+  const handlePriceRange = () =>{
+    filterProducts(products);
+  }
 
   useEffect(() => {
     const fetchDefaultPriceRange = async () => {
@@ -43,14 +59,13 @@ const Filter = ({ products, onFilterChange }) => {
     if (products){
       fetchDefaultPriceRange();
     }
-    console.log("load!");
     
   }, [products]);
 
   useEffect(() =>{
-    applyFilters()
+    filterProducts(products);
 
-  },[sortBy,selectedRating,selectedCategory,priceRange]);
+  },[sortBy,selectedRating,selectedCategory]);
 
 
   return (
@@ -102,11 +117,11 @@ const Filter = ({ products, onFilterChange }) => {
             ))}
           </select>
       </div>
-      {!loading && <div>
+      <div>
         <label className="filter-label">
           Price Range: ${priceRange[0]} - ${priceRange[1]}
         </label>  
-        <ReactSlider
+        {!loading && <ReactSlider
           className="horizontal-slider"
           thumbClassName="example-thumb"
           trackClassName="example-track"
@@ -117,8 +132,9 @@ const Filter = ({ products, onFilterChange }) => {
           onChange={(value) =>setPriceRange(value)}
           pearling
           minDistance={50}
-        />
-    </div>}
+        />}
+    </div>
+    {!loading && <button onClick={handlePriceRange}>Apply</button>}
     </div>
   );
 };

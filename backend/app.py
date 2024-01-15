@@ -52,6 +52,16 @@ def products():
 
     return jsonify(result)
 
+@app.route('/products/<int:id>', methods = ['GET'])
+def product(id):
+    product = Product.query.get(id);
+    print(product);
+
+    productSchema = ProductSchema(many=False)
+    result = productSchema.dump(product)
+
+    return jsonify(result)
+
 @app.route('/products', methods=['POST'])
 def add_products():
     try:
