@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import '../styles/style.css';
 import { useAuth } from "../hooks/useAuth";
 
 export default function Navbar() {
 
     const {isLoggedIn,setLoggedIn, userRole} = useAuth();
+    const navigate = useNavigate()
 
     const handleLogout = () => {
         localStorage.removeItem("jwtToken");
         setLoggedIn(false);
+        navigate('/')
     }
     return (
 
@@ -29,8 +31,7 @@ export default function Navbar() {
                 <h3>{isLoggedIn && <p>You are logged in</p>}</h3> 
             </div>
             <div className="adminLinks">
-                {/* in future should be seen only by admin/employee types */}
-                {userRole !==null && <Link to="/employee">Management tool</Link>}
+                {userRole !==null && userRole.type == 'employee' && <Link to="/employee">Management tool</Link>}
             </div>
 
         </nav>
