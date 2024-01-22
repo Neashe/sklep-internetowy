@@ -1,14 +1,17 @@
 import { Link, useNavigate } from "react-router-dom"
 import '../styles/style.css';
 import { useAuth } from "../hooks/useAuth";
+import { useCart } from "../hooks/useCart"
 
 export default function Navbar() {
 
     const {isLoggedIn,setLoggedIn, userRole} = useAuth();
+    const {state, dispatch} = useCart()
     const navigate = useNavigate()
 
     const handleLogout = () => {
         localStorage.removeItem("jwtToken");
+        dispatch({type: "CLEAR_CART"})
         setLoggedIn(false);
         navigate('/')
     }
@@ -22,7 +25,7 @@ export default function Navbar() {
             <div className="productLinks">
                 <Link to="/products">PRODUCTS</Link>
                 <Link to="/contact">CONTACT US</Link>
-                <Link to="/cart"><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="cart-icon" /></Link>
+                <Link to={isLoggedIn ? "/cart" : "/login"}><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="cart-icon" /></Link>
 
             </div>
             <div className="loginLinks">

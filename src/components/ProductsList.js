@@ -1,13 +1,24 @@
 import { useRef } from "react";
 import "../styles/products.css";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../hooks/useCart"
+import {useAuth} from "../hooks/useAuth"
 
 const ProductList = ({products}) => {
 
     const ref = useRef(null);
     const navigate = useNavigate();
-    const handleAddToCart = (event) => {
-        event.stopPropagation();
+    
+    const { state, dispatch } = useCart()
+    const {isLoggedIn} = useAuth();
+
+    const handleAddToCart = (product) => (event) => {
+        event.stopPropagation()
+        if(isLoggedIn){
+            dispatch({type: "ADD_TO_CART", payload: product})
+        } else {
+            navigate("/login")
+        }
     }
 
     const handleOther = (id) => {
@@ -24,7 +35,7 @@ const ProductList = ({products}) => {
                     <p className="rating">rating {product.rating}</p>
                     <div className="cart">
                         <h3>{product.price} $</h3>
-                        <button onClick={handleAddToCart}><img src={process.env.PUBLIC_URL + '/icons/add-to-cart.png'} alt="" /></button>
+                        <button onClick={handleAddToCart(product)}><img src={process.env.PUBLIC_URL + '/icons/add-to-cart.png'} alt="" /></button>
                     </div>
                 </div>
             ))}
