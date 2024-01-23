@@ -6,7 +6,9 @@ export default function Employee(){
     const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
     const [product, setProduct] = useState({"productName": "", "category": "", "price": "", "quantity": "", "rating": "", "description": "", "thumbnail": ""})
-    
+    const [categories, setCategories] = useState([])
+    const [newCategory, setNewCategory] = useState(false)
+
     useEffect(() => {
         const jwtToken = localStorage.getItem('jwtToken');
         if (!jwtToken) {
@@ -28,7 +30,6 @@ export default function Employee(){
         })
         .then(data => {
             console.log(data)
-            setIsLoading(false)
         })
         .catch(errorPromise =>{
             console.log(errorPromise)
@@ -42,6 +43,29 @@ export default function Employee(){
                     navigate("/")
                 }
             })
+        })
+    }, [])
+
+    useEffect(() => {
+        fetch("http://localhost:5000/products/categories", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then(res => {
+            if(res.ok){
+                return res.json()
+            }
+        })
+        .then(res => {
+            console.log(res)
+            setCategories(res)
+            setProduct({"productName": "", "category": categories[0], "price": "", "quantity": "", "rating": "", "description": "", "thumbnail": ""})
+            setIsLoading(false)
+        })
+        .catch(e => {
+            console.log(e)
         })
     }, [])
 
@@ -67,10 +91,18 @@ export default function Employee(){
     }
 
     const handleInputChange = (event) => {
-        const {name, value} = event.target
+        const {name, value, type} = event.target
         setProduct((prev) => ({
             ...prev, [name]: value
         }))
+
+        if(name == "category"){
+            if(value == "NEW_CATEGORY" || type == "text")
+                setNewCategory(true)
+            else {
+                setNewCategory(false)
+            }
+        }
     } 
 
     if(isLoading){
@@ -85,12 +117,18 @@ export default function Employee(){
                 <label>Product Name</label>
                 <input type="text" name="productName" placeholder="Product Name" onChange={handleInputChange}/>
                 <label>Category</label>
-                <select id="category" name="category" onChange={handleInputChange}>
-                    <option value=""></option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Appliances">Appliances</option>
-                    <option value="Sports & Outdoors">Sports & Outdoors</option>
+                <select id="category" name="category" onChange={handleInputChange} value={product.category}>
+                    {categories.map((category) => {
+                        return <option value={category} key={category}>{category}</option>
+                    })}
+                    <option name="category" value="NEW_CATEGORY">New category</option>
                 </select>
+                {newCategory && (
+                    <>
+                        <label>New category</label>
+                        <input type="text" name="category" placeholder="New category name" onChange={handleInputChange}/>
+                    </>
+                )}
                 <label>Price</label>
                 <input type="text" name="price" placeholder="Price" onChange={handleInputChange}/>
                 <label>Quantity</label>
