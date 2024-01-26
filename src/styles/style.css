@@ -75,6 +75,7 @@ body {
   .title {
     font-size:4rem;
     font-weight: 300;
+    text-align: center;
   }
   .page-desc{
     font-size: 2rem;
@@ -84,4 +85,5 @@ body {
     height: 40px;
     font-size: 1rem;
     width: 200px;
+    margin-top: 10px;
   }
