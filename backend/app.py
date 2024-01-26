@@ -133,6 +133,14 @@ def modify_product(productId):
 
     return jsonify({'message': 'Product modified succesfully'})
 
+@app.route('/products/categories', methods=['GET'])
+def get_categories():
+    products = Product.query.all()
+
+    categories = set(product.category for product in products)
+
+    return jsonify(list(categories))
+
 @app.route('/')
 def check():
     return jsonify('Hello World')
