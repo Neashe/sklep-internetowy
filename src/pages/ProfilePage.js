@@ -90,7 +90,6 @@ function ProfileShow() {
                     <h5>{user.email}</h5>
                     <h5>{user.type}</h5>
                     <button onClick={handleEditProfile}>Edit</button>
-                    <button onClick={handleSignOff}>Sign Off</button>
                 </>
             )}
         </div>

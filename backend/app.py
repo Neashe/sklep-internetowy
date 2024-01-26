@@ -43,6 +43,104 @@ class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Product
 
+@app.route('/products', methods = ['GET'])
+def products():
+    products = Product.query.all()
+
+    productSchema = ProductSchema(many=True)
+    result = productSchema.dump(products)
+
+    return jsonify(result)
+
+@app.route('/products/<int:id>', methods = ['GET'])
+def product(id):
+    product = Product.query.get(id);
+    print(product);
+
+    productSchema = ProductSchema(many=False)
+    result = productSchema.dump(product)
+
+    return jsonify(result)
+
+@app.route('/products', methods=['POST', 'OPTIONS'])
+def add_products():
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'success'})
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+
+    data = request.get_json()
+
+    productSchema = ProductSchema()
+    error = productSchema.validate(data)
+
+    if error:
+        return jsonify({'error': error}), 400
+    
+    newProduct = Product(
+        productName=data["productName"],
+        category=data["category"],
+        price=data["price"],
+        quantity=data["quantity"],
+        rating=data["rating"],
+        description=data["description"],
+        thumbnail=data["thumbnail"]
+    )
+
+    db.session.add(newProduct)
+    db.session.commit()
+
+    result = productSchema.dump(newProduct)
+
+    return jsonify(result)
+
+@app.route('/products/delete/<int:productId>', methods=['DELETE', 'OPTIONS'])
+def delete_product(productId):
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'success'})
+        response.headers.add('Access-Control-Allow-Methods', 'DELETE')
+        return response
+    product = Product.query.get(productId)
+
+    if not product:
+        return jsonify({'error': 'Product not found'}), 404
+
+    db.session.delete(product)
+    db.session.commit()
+
+    return jsonify({'messege': 'Product deleted successfully'})
+
+@app.route('/products/modify/<int:productId>', methods=['PUT', 'OPTIONS'])
+def modify_product(productId):
+    if request.method == 'OPTIONS':
+        response = jsonify({'status': 'success'})
+        response.headers.add('Access-Control-Allow-Methods', 'DELETE')
+        return response
+
+    product = Product.query.get(productId)
+
+    data = request.get_json()
+
+    product.productName = data.get("productName", product.productName)
+    product.category = data.get("category", product.category)
+    product.price = data.get("price", product.price)
+    product.quantity = data.get("quantity", product.quantity)
+    product.rating = data.get("rating", product.rating)
+    product.description = data.get("description", product.description)
+    product.thumbnail = data.get("thumbnail", product.thumbnail)
+
+    db.session.commit()
+
+    return jsonify({'message': 'Product modified succesfully'})
+
+@app.route('/products/categories', methods=['GET'])
+def get_categories():
+    products = Product.query.all()
+
+    categories = set(product.category for product in products)
+
+    return jsonify(list(categories))
+
 @app.route('/')
 def check():
     return jsonify('Hello World')

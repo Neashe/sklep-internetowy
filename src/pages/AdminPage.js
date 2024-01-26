@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
+import "../styles/employee.css"
 
 export default function Employee(){
     const [isLoading, setIsLoading] = useState(true)
@@ -49,7 +50,11 @@ export default function Employee(){
 
     return (
         <div>
-            <h1>Employee Page</h1>
+            <h1>MANAGMENT TOOL</h1>
+            <div className="employeeLinks">
+                <Link to="/employee/addProduct">Add new product</Link>
+                <Link to="/employee/modifyProducts">Modify products</Link>
+            </div>
         </div>
     )
 }
