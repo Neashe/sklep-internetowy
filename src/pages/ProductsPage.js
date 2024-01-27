@@ -1,52 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Filter from "../components/Filter";
 import ProductsList from "../components/ProductsList";
-import axios from "axios";
+import useFetch from "../hooks/useFetch";
+import {api} from "../api/api";
 
-const api = axios.create({
-    baseURL: "http://localhost:5000",
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  
 const ProductsBrowser = () => {
-
-    const [products, setProducts] = useState([]);
     const [filteredProducts,setFilteredProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(()=>{
-        const fetchProducts = async () => {
-            try {
-              const response = await api.get('products');
-              setProducts(response.data);
-              setLoading(false);
-            } catch (error) {
-              console.error("Error fetching products:", error);
-            }
-          };
-
-        fetchProducts(); 
-        setFilteredProducts(products);
-    },[])
-
-    useEffect(() => {
-        if (!loading){
-            setFilteredProducts(products);
-        }
-      }, [products]);
+    const {data: products, isPending, error} = useFetch(api,`products`);
 
     const onFilterChange = (filtered) =>{
         setFilteredProducts(filtered);
     }
     return ( 
         <div className="products-browser">
-            <h1>{loading}</h1>
-            {console.log(loading)}
+            {error && <span className="not-fetched"><h1>Sorry, could not fetch the data</h1></span>}
+            {isPending && <p>Loading...</p>}
             {products && (<Filter products={products} onFilterChange={onFilterChange}></Filter>)}
             {filteredProducts && <ProductsList products={filteredProducts}></ProductsList>}
-            {console.log(filteredProducts)}
         </div>
      );
     }

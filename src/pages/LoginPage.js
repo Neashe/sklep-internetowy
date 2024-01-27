@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 import CryptoJS from "crypto-js";
 import '../styles/login.css';
 import { useAuth } from "../hooks/useAuth";
+import axios from "axios";
 
 function LoginForm() {
     const [email, setEmail] = useState('')
@@ -11,7 +12,6 @@ function LoginForm() {
     const {setLoggedIn} = useAuth();
 
     const handleLogin = () => {
-        console.log(email, hashedPassword)
 
         fetch("http://localhost:5000/login", {
             method: "POST",
