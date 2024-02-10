@@ -70,7 +70,6 @@ const Filter = ({ products, onFilterChange }) => {
 
   return (
     <div className="filter">
-      <h2>{String(loading)}</h2>
       <div className="filter-comp">
         <label htmlFor="sort">
           Sort By

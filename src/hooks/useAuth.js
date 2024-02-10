@@ -24,16 +24,20 @@ export const AuthProvider = ({ children }) => {
             },
           });
           setUserRole(response.data);
+          setLoggedIn(true);
         } catch (error) {
           console.error('Error fetching user role:', error);
         }
       };
-  
-      if (isLoggedIn) {
-        fetchUserRole();
-      } else {
-        setUserRole(null);
-      }
+
+      const jwtToken = localStorage.getItem("jwtToken");
+        if (jwtToken) {
+          console.log("haha");
+            fetchUserRole();
+        } 
+        else{
+          setUserRole(null);
+        }
     }, [isLoggedIn]);
   
     return (

@@ -1,21 +1,25 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import "../styles/employee.css"
 import {api_protected,api} from "../api/api";
 import useFetch from "../hooks/useFetch";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Employee(){
     const navigate = useNavigate()
     const [product, setProduct] = useState({"productName": "", "category": "", "price": "", "quantity": "", "rating": "", "description": "", "thumbnail": ""})
     const [newCategory, setNewCategory] = useState(false)
+    const {userRole, isLoggedIn} = useAuth();
     
-    const {data,isLoading:isLoadingEmp,error} = useFetch(api_protected, `protected/employee`);
+    // const {data,isLoading:isLoadingEmp,error} = useFetch(api_protected, `protected/employee`);
     const {data: categories, isLoading: isLoadingCat,error: errorCat} = useFetch(api,'products/categories');
-    console.log("data"+data);
-    console.log(isLoadingEmp);
+
     useEffect(()=>{
-        if (error){
+        if (!isLoggedIn){
             navigate("/login");
+        }
+        if (userRole && userRole.type !== "employee"){
+            navigate("/");
         }
     },[])
     // useEffect(() => {

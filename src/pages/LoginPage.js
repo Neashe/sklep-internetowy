@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom"
 import CryptoJS from "crypto-js";
 import '../styles/login.css';
 import { useAuth } from "../hooks/useAuth";
-import axios from "axios";
 
 function LoginForm() {
     const [email, setEmail] = useState('')
