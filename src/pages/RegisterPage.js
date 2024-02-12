@@ -19,7 +19,6 @@ function RegisterForm() {
     }
 
     const handleRegister = () => {
-        console.log(newUser)
 
         fetch("http://localhost:5000/user/add", {
             method: 'POST',

@@ -11,10 +11,9 @@ import ProductsBrowser from "./pages/ProductsPage";
 import Product from "./pages/ProductPage";
 import Contact from "./pages/ContactPage";
 import AddProduct from "./pages/AddProduct";
-import ModifyProducts from "./pages/ModifyProducts";
-import ModifyProduct from "./pages/ModifyProduct";
 import { CartProvider } from "./hooks/useCart";
 import Cart from "./pages/CartPage"
+import "./styles/style.css";
 
 function App(){
 
@@ -33,8 +32,7 @@ function App(){
                         <Route path="/products/:id" element={<Product />} />
                         <Route path="/contact" element={<Contact />}></Route>
                         <Route path="/employee/addProduct" element={<AddProduct />} />
-                        <Route path="/employee/modifyProducts" element={<ModifyProducts />} />
-                        <Route path="/employee/modifyProducts/:id" element={<ModifyProduct />} />
+                        {/* <Route path="/employee/modifyProducts/:id" element={<ModifyProduct />} /> */}
                         <Route path="/cart" element={<Cart />} />
                     </Routes>
                 </BrowserRouter>

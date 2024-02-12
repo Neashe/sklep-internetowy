@@ -3,6 +3,7 @@ import Filter from "../components/Filter";
 import ProductsList from "../components/ProductsList";
 import useFetch from "../hooks/useFetch";
 import {api} from "../api/api";
+import "../styles/style.css";
 
 const ProductsBrowser = () => {
     const [filteredProducts,setFilteredProducts] = useState([]);

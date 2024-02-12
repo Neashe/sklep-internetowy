@@ -32,7 +32,7 @@ export default function Employee(){
                 <h1>MANAGMENT TOOL</h1>
                 <div className="employeeLinks">
                     <Link to="/employee/addProduct">Add new product</Link>
-                    <Link to="/employee/modifyProducts">Modify products</Link>
+                    <Link to="/products">Modify products</Link>
                 </div>
             </div>
             }

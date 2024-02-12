@@ -16,17 +16,35 @@ const api = axios.create({
     },
   });
   
-axios.interceptors.request.use(
+  api_protected.interceptors.request.use(
     async (config) => {
         const newToken = localStorage.getItem('jwtToken');
         if (newToken !== jwtToken) {
             jwtToken = newToken;
-            api_protected.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+            config.headers['Authorization'] = `Bearer ${jwtToken}`;
         }
-        return await Promise.resolve(config); // Resolve the Promise to allow the request to proceed
+        return config;
     },
     (error) => {
-        console.log("Error");
+        return Promise.reject(error);
+    }
+);
+
+api_protected.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    async (error) => {
+        if (error.response && error.response.status === 401) {
+            // Unauthorized error, token is likely invalid
+            // Clear token from localStorage and redirect to login page
+            localStorage.removeItem('jwtToken');
+            console.log("No dziala dziala");
+            // Optionally, you can also update the state to reflect the user being logged out
+            // setLoggedIn(false);
+            // Redirect to login page
+            // navigate('/login');
+        }
         return Promise.reject(error);
     }
 );

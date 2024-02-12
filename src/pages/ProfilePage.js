@@ -75,7 +75,7 @@ function ProfileShow() {
     }
 
     return (
-        <div>
+        <div className="profilePage">
             {edit ? (
                 <>
                     <input type="text" name="firstname" placeholder="firstname" onChange={handleInputChange}/>
@@ -84,12 +84,12 @@ function ProfileShow() {
                 </>
             ) : (
                 <>
-                    <h2>Profile</h2>
-                    <h3>{user.firstname}</h3>
-                    <h3>{user.lastname}</h3>
-                    <h5>{user.email}</h5>
+                    <h2>My data</h2>
+                    <h3>Firstname: {user.firstname}</h3>
+                    <h3>Lastname {user.lastname}</h3>
+                    <h5>Email: {user.email}</h5>
                     <h5>{user.type}</h5>
-                    <button onClick={handleEditProfile}>Edit</button>
+                    <button onClick={handleEditProfile}>Edit my profile</button>
                 </>
             )}
         </div>

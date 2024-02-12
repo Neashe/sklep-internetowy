@@ -11,7 +11,6 @@ export default function Employee(){
     const [newCategory, setNewCategory] = useState(false)
     const {userRole, isLoggedIn} = useAuth();
     
-    // const {data,isLoading:isLoadingEmp,error} = useFetch(api_protected, `protected/employee`);
     const {data: categories, isLoading: isLoadingCat,error: errorCat} = useFetch(api,'products/categories');
 
     useEffect(()=>{
@@ -22,64 +21,6 @@ export default function Employee(){
             navigate("/");
         }
     },[])
-    // useEffect(() => {
-    //     if (!jwtToken) {
-    //         navigate("/login");
-    //         return;
-    //     }
-    //     fetch("http://localhost:5000/protected/employee", {
-    //         method: 'GET',
-    //         headers: {
-    //             Authorization: `Bearer ${jwtToken}`,
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then(res => {
-    //         if (res.ok) {
-    //             return res.json()
-    //         }
-    //         throw res.json()
-    //     })
-    //     .then(data => {
-    //         console.log(data)
-    //     })
-    //     .catch(errorPromise =>{
-    //         console.log(errorPromise)
-    //         errorPromise.then(error => {
-    //             if(error.msg == "Token has expired"){
-    //                 localStorage.removeItem("jwtToken")
-    //                 navigate("/")
-    //             }
-    //             if(error.msg == "You do not have permission to access this page."){
-    //                 alert(error.msg)
-    //                 navigate("/")
-    //             }
-    //         })
-    //     })
-    // }, [])
-
-    // useEffect(() => {
-    //     fetch("http://localhost:5000/products/categories", {
-    //         method: "GET",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then(res => {
-    //         if(res.ok){
-    //             return res.json()
-    //         }
-    //     })
-    //     .then(res => {
-    //         console.log(res)
-    //         setCategories(res)
-    //         setProduct({"productName": "", "category": categories[0], "price": "", "quantity": "", "rating": "", "description": "", "thumbnail": ""})
-    //         setIsLoading(false)
-    //     })
-    //     .catch(e => {
-    //         console.log(e)
-    //     })
-    // }, [])
 
     const handleAddProduct = () => {
         console.log(product)

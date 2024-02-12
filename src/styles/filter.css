@@ -1,0 +1,57 @@
+.filter {
+    width: 350px;
+    border-right: 1px solid black;
+}
+
+.filter-comp{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.horizontal-slider {
+    width: 300px;
+    max-width: 300px;
+    height: 40px;
+}
+
+.horizontal-slider .example-track {
+    top: 20px;
+    height: 6px;
+    border-radius: 10px;
+}
+
+.horizontal-slider .example-thumb {
+    top: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #f77d8f;
+    color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.example-track.example-track-0{
+    background: #EAE4E0;
+}
+
+.example-track.example-track-1{
+    background: #f77d8f;
+}
+.example-track.example-track-2{
+    background: #EAE4E0;
+}
+
+.filter-components {
+    display: flex;
+    flex-direction: column;
+}
+
+.ratings {
+    width: 30px;
+    height: 15px;
+    font-size: 1.1rem;
+}
+
