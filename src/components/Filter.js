@@ -133,7 +133,6 @@ const Filter = ({ products, onFilterChange }) => {
           minDistance={50}
         />}
     {!loading && <button className="btn btn-red btn-md" onClick={handlePriceRange}>Apply</button>}
-    {console.log(products)}
     </div>}
     </div>
   );

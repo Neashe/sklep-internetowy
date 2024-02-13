@@ -15,7 +15,7 @@ export default function Navbar() {
         setLoggedIn(false);
         navigate('/')
     }
-    
+
     return (
         <div>
             <nav className="navbar">
@@ -26,7 +26,7 @@ export default function Navbar() {
                 {(userRole === null || userRole.type !== 'employee') && <div className="productLinks">
                     <Link to="/products">PRODUCTS</Link>
                     <Link to="/contact">CONTACT US</Link>
-                    <Link to={isLoggedIn ? "/cart" : "/login"}><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="cart-icon" /></Link>
+                    <Link to="/cart"><img  className="icon" src={process.env.PUBLIC_URL + '/icons/cart.png'} alt="cart-icon" /></Link>
 
                 </div>}
                 <div className="loginLinks">

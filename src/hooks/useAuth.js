@@ -1,13 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {api_protected} from "../api/api.js";
-import axios from "axios";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem("jwtToken"));
     const [userRole, setUserRole] = useState(null);
-  
+
     useEffect(() => {
       const fetchUserRole = async () => {
         try {
@@ -20,12 +19,12 @@ export const AuthProvider = ({ children }) => {
           setLoggedIn(true);
         } catch (error) {
           console.error('Error fetching user role:', error);
+          setLoggedIn(false);
         }
       };
 
       const jwtToken = localStorage.getItem("jwtToken");
         if (jwtToken) {
-          console.log("haha");
             fetchUserRole();
         } 
         else{

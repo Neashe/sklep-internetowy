@@ -1,53 +1,33 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
+import useFetch from "../hooks/useFetch";
+import { api_protected } from "../api/api";
+import { useAuth } from "../hooks/useAuth";
 
 function ProfileShow() {
-    const [user, setUser] = useState({"id":"", "firstname":"", "lastname":"", "email":"", "hashedPassword":"", "type":""})
     const [edit, setEdit] = useState(false)
+    const {data:user,isPending,error} = useFetch(api_protected,'/user');
+    const {isLoggedIn} = useAuth();
+
     const navigate = useNavigate()
 
-    useEffect(() => {
-        const jwtToken = localStorage.getItem('jwtToken');
-        if (!jwtToken) {
+    useEffect(()=> {
+        if (!isLoggedIn){
             navigate("/login");
-            return;
         }
-        fetch("http://localhost:5000/user", {
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${jwtToken}`,
-                "Content-Type": "application/json",
-            },
-        })
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            }
-            throw res.json()
-        })
-        .then(data => {
-            setUser(data)
-        })
-        .catch(errorPromise =>{
-            errorPromise.then(error => {
-                if(error.msg == "Token has expired"){
-                    localStorage.removeItem("jwtToken")
-                    navigate("/")
-                }
-            })
-        })
-    }, [])
+    },[isLoggedIn]);
 
     const handleInputChange = (event) => {
-        const {name, value} = event.target
-        setUser((prev) => ({
-            ...prev, [name]: value
-        }))
+        const {name, value} = event.target;
+        user.firstname = value;
+        user.lastname = value;
     }
 
     const handleEditProfile = () => {
         setEdit(true)
     }
+
+
 
     const handleSaveProfile = () => {
         fetch(`http://localhost:5000/user/modify/${user.id}`, {
@@ -69,29 +49,28 @@ function ProfileShow() {
         setEdit(false)
     }
 
-    const handleSignOff = () => {
-        localStorage.clear()
-        navigate("/")
-    }
-
     return (
-        <div className="profilePage">
-            {edit ? (
-                <>
-                    <input type="text" name="firstname" placeholder="firstname" onChange={handleInputChange}/>
-                    <input type="text" name="lastname" placeholder="lastname" onChange={handleInputChange}/>
-                    <button onClick={handleSaveProfile}>Save</button>
-                </>
-            ) : (
-                <>
-                    <h2>My data</h2>
-                    <h3>Firstname: {user.firstname}</h3>
-                    <h3>Lastname {user.lastname}</h3>
-                    <h5>Email: {user.email}</h5>
-                    <h5>{user.type}</h5>
-                    <button onClick={handleEditProfile}>Edit my profile</button>
-                </>
-            )}
+        <div>
+            {error && <h1>Sorry, couldn't fetch info </h1>}
+            {isPending && <h1>Loading...</h1>}
+            {(!isPending && !error) && <div className="profilePage">
+                {edit ? (
+                    <>
+                        <input type="text" name="firstname" placeholder="firstname" onChange={handleInputChange}/>
+                        <input type="text" name="lastname" placeholder="lastname" onChange={handleInputChange}/>
+                        <button onClick={handleSaveProfile}>Save</button>
+                    </>
+                ) : (
+                    <>
+                        <h2>My Profile</h2>
+                        <h3>Firstname: {user.firstname}</h3>
+                        <h3>Lastname {user.lastname}</h3>
+                        <h5>Email: {user.email}</h5>
+                        <h5>{user.type}</h5>
+                        <button onClick={handleEditProfile}>Edit my profile</button>
+                    </>
+                )}
+            </div>}
         </div>
     )
 }

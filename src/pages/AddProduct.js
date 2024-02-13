@@ -23,7 +23,6 @@ export default function Employee(){
     },[])
 
     const handleAddProduct = () => {
-        console.log(product)
 
         fetch("http://localhost:5000/products", {
             method: 'POST',
