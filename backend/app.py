@@ -52,6 +52,20 @@ def products():
 
     return jsonify(result)
 
+@app.route('/products/count', methods = ['GET'])
+def products_count():
+    product_number = Product.query.count()
+    print(product_number)
+
+    return jsonify({'count':product_number})
+
+@app.route('/products/ids', methods=['GET'])
+def product_ids():
+    product_ids = [product.productID for product in Product.query.all()]
+    print(product_ids)
+
+    return jsonify({'product_ids': product_ids})
+
 @app.route('/products/<int:id>', methods = ['GET'])
 def product(id):
     product = Product.query.get(id);

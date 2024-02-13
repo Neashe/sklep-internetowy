@@ -11,7 +11,6 @@ function LoginForm() {
     const {setLoggedIn} = useAuth();
 
     const handleLogin = () => {
-        console.log(email, hashedPassword)
 
         fetch("http://localhost:5000/login", {
             method: "POST",
@@ -30,7 +29,8 @@ function LoginForm() {
                 }
             })
             .then(data => {
-                localStorage.setItem("jwtToken", data.token)
+                console.log(data.token);
+                localStorage.setItem("jwtToken", data.token);
                 setLoggedIn(true)
                 navigate("/")
             })

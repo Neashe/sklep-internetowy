@@ -39,3 +39,28 @@
     width: 100px;
     height: 100px;
 }
+
+
+.cart-item{
+    display: flex;
+    /* background-color: #FAF4F0; */
+    border: 1px solid black;
+    width: 600px;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+}
+.cart-item img {
+    height: 100px;
+    width: 100px;
+}
+.cart-item input {
+    width: 30px;
+    height: 20px;
+}
+
+.cart-items{
+    display: flex;
+    /* align-items: center; */
+    flex-direction: column;
+}

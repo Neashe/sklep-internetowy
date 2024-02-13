@@ -44,37 +44,9 @@ h3 {
     color:#EA344F;
 }
 
-button {
-    color: white;
-    background-color: white;
-    border: 1px solid #68B679;
-    border-radius: 10px;
-    height: 40px;
-    justify-self: end;
-}
-
-button:hover{
-    background-color: #68B679;
-    cursor: pointer;
-}
 
 
-.filter {
-    /* background-color: antiquewhite; */
-    /* display: flex;
-    flex-direction: column; */
-    width: 350px;
-    border-right: 1px solid black;
-    /* gap: 10px; */
 
-}
-
-.filter-comp{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 10px;
-}
 .products-browser{
     display: flex;
     padding: 20px;
@@ -103,97 +75,3 @@ select{
     border-radius: 10px;
 
 }
-
-.horizontal-slider {
-    width: 300px;
-    max-width: 300px;
-    height: 40px;
-}
-
-.horizontal-slider .example-track {
-    top: 20px;
-    height: 6px;
-    border-radius: 10px;
-}
-
-.horizontal-slider .example-thumb {
-    top: 8px;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    background-color: #f77d8f;
-    color: white;
-    cursor: pointer;
-    box-sizing: border-box;
-}
-
-.example-track.example-track-0{
-    background: #EAE4E0;
-}
-
-.example-track.example-track-1{
-    background: #f77d8f;
-}
-.example-track.example-track-2{
-    background: #EAE4E0;
-}
-
-.filter-components {
-    display: flex;
-    flex-direction: column;
-}
-
-.ratings {
-    width: 30px;
-    height: 15px;
-    font-size: 1.1rem;
-}
-
-
-/* [
-    {
-        "productName": "Laptop",
-        "category": "Electronics",
-        "price": 999.99,
-        "quantity": 50,
-        "rating": 4.5,
-        "description": "Powerful laptop for all your computing needs",
-        "thumbnail": ""
-    },
-    {
-        "productName": "Smartphone",
-        "category": "Electronics",
-        "price": 499.99,
-        "quantity": 100,
-        "rating": 4.2,
-        "description": "Feature-rich smartphone with the latest technology",
-        "thumbnail": ""
-    },
-    {
-        "productName": "Coffee Maker",
-        "category": "Appliances",
-        "price": 79.99,
-        "quantity": 30,
-        "rating": 4.0,
-        "description": "Brew your favorite coffee with this stylish coffee maker",
-        "thumbnail": ""
-    },
-    {
-        "productName": "Running Shoes",
-        "category": "Sports & Outdoors",
-        "price": 89.99,
-        "quantity": 75,
-        "rating": 4.8,
-        "description": "Comfortable and durable running shoes for your active lifestyle",
-        "thumbnail": ""
-    },
-    {
-        "productName": "Wireless Earbuds",
-        "category": "Electronics",
-        "price": 59.99,
-        "quantity": 50,
-        "rating": 4.3,
-        "description": "Enjoy music on the go with these high-quality wireless earbuds",
-        "thumbnail": ""
-    },
-] */

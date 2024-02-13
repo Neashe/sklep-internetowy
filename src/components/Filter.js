@@ -1,4 +1,4 @@
-import "../styles/products.css";
+import "../styles/filter.css";
 import React, { useEffect, useState } from 'react';
 import ReactSlider from "react-slider";
 
@@ -70,7 +70,6 @@ const Filter = ({ products, onFilterChange }) => {
 
   return (
     <div className="filter">
-      <h2>{String(loading)}</h2>
       <div className="filter-comp">
         <label htmlFor="sort">
           Sort By
@@ -117,7 +116,7 @@ const Filter = ({ products, onFilterChange }) => {
             ))}
           </select>
       </div>
-      {products.length>0 && <div>
+      {products.length>0 && <div className="filter-comp">
         <label className="filter-label">
           Price Range: ${priceRange[0]} - ${priceRange[1]}
         </label>  
@@ -133,8 +132,7 @@ const Filter = ({ products, onFilterChange }) => {
           pearling
           minDistance={50}
         />}
-    {!loading && <button onClick={handlePriceRange}>Apply</button>}
-    {console.log(products)}
+    {!loading && <button className="btn btn-red btn-md" onClick={handlePriceRange}>Apply</button>}
     </div>}
     </div>
   );

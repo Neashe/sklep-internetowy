@@ -14,7 +14,7 @@ export default function Home(){
             <section className="hero">
                 <h1 className="title">To jest przykładowa strona sklepu</h1>
                 <p className="page-desc">Przykładowy slogan</p>
-                <button className="to-products" onClick={navigateToProducts}>Przejdz do produktow</button>
+                <button className="btn to-products btn-red" onClick={navigateToProducts}>Przejdz do produktow</button>
             </section>
         </div>
     )

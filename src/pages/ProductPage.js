@@ -47,9 +47,6 @@ const Product = () => {
               <h3>Product description</h3>
               <p>{product.description}</p>
             </section>
-            {console.log(product)}
-            {console.log(error)}
-            {console.log(isPending)}
           </div>}
 
         </div>
